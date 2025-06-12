@@ -2,9 +2,12 @@ site_name: EAMxx
 
 nav:
   - 'Home': 'index.md'
+  # - 'WIP Sandbox': 'WIP.md'
   - 'User Guide':
     - 'Overview': 'user/index.md'
+    # - 'Quick-start Guide': 'user/user_quickstart.md'
     - 'EAMxx case basics': 'user/eamxx_cases.md'
+    # - 'Testing': 'user/user_testing.md'
     - 'Model Configuration': 'user/model_configuration.md'
     - 'Nudging': 'user/nudging.md'
     - 'Extra radiation calls': 'user/clean_clear_sky.md'
@@ -49,6 +52,7 @@ nav:
   - 'Technical Guide':
     - 'Overview': 'technical/index.md'
     - 'AeroCom cloud top': 'technical/aerocom_cldtop.md'
+  # - 'Glossary': 'common/glossary.md'
 
 edit_uri: ""
 
