@@ -66,3 +66,4 @@ if (TARGET eamxx_physics)
   # Add this library to eamxx_physics
   target_link_libraries(eamxx_physics INTERFACE mam)
 endif()
+// changed

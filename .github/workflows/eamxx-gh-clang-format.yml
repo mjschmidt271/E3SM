@@ -18,7 +18,8 @@ concurrency:
 
 jobs:
   clang-format-linter:
-    if: ${{ github.repository == 'E3SM-Project/E3SM' }}
+    # FIXME: change repo!!!
+    if: ${{ github.repository == 'mjschmidt271/E3SM' }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
