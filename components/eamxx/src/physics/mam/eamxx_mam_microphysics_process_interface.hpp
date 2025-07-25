@@ -32,7 +32,7 @@ class MAMMicrophysics final : public MAMGenericInterface {
   // a thread team dispatched to a single vertical column
   using ThreadTeam = mam4::ThreadTeam;
 
- public:
+public:
   // Constructor
   MAMMicrophysics(const ekat::Comm &comm, const ekat::ParameterList &params);
 
@@ -44,8 +44,7 @@ class MAMMicrophysics final : public MAMGenericInterface {
   std::string name() const { return "mam_aero_microphysics"; }
 
   // grid
-  void set_grids(
-      const std::shared_ptr<const GridsManager> grids_manager) override;
+  void set_grids(const std::shared_ptr<const GridsManager> grids_manager) override;
 
   // management of common atm process memory
   size_t requested_buffer_size_in_bytes() const override;
@@ -60,7 +59,7 @@ class MAMMicrophysics final : public MAMGenericInterface {
   // Finalize
   void finalize_impl(){/*Do nothing*/};
 
- private:
+private:
   // Output extra mam4xx diagnostics.
   bool extra_mam4_aero_microphys_diags_ = false;
 
@@ -73,9 +72,9 @@ class MAMMicrophysics final : public MAMGenericInterface {
   // If >= 0, bypass computation based on orbital year and use fixed parameters
   // If <  0, compute based on orbital year, specified above
   // These variables are required to be double.
-  double m_orbital_eccen;  // Eccentricity
-  double m_orbital_obliq;  // Obliquity
-  double m_orbital_mvelp;  // Vernal Equinox Mean Longitude of Perihelion
+  double m_orbital_eccen; // Eccentricity
+  double m_orbital_obliq; // Obliquity
+  double m_orbital_mvelp; // Vernal Equinox Mean Longitude of Perihelion
 
   struct Config {
     // stratospheric chemistry parameters
@@ -159,18 +158,18 @@ class MAMMicrophysics final : public MAMGenericInterface {
   int len_temporary_views_{0};
 
   void add_io_docstring_to_fields_with_mixed_units(const std::map<std::string, std::string> &flds) {
-    using str_atts_t = std::map<std::string,std::string>;
+    using str_atts_t = std::map<std::string, std::string>;
     for (const auto &pair : flds) {
       // Get the field, and add a docstring to its string attributes
       // This is used to document that the field contains heterogeneous
       // quantities, i.e., species have different units.
-      auto &f = get_field_out(pair.first);
-      auto &io_str_atts = f.get_header().get_extra_data<str_atts_t>("io: string attributes");
+      auto &f            = get_field_out(pair.first);
+      auto &io_str_atts  = f.get_header().get_extra_data<str_atts_t>("io: string attributes");
       io_str_atts["doc"] = pair.second;
     }
   }
-};  // MAMMicrophysics
+}; // MAMMicrophysics
 
-}  // namespace scream
+} // namespace scream
 
-#endif  // EAMXX_MAM_MICROPHYSICS_HPP
+#endif // EAMXX_MAM_MICROPHYSICS_HPP
