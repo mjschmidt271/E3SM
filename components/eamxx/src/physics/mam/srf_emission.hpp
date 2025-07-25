@@ -133,8 +133,3 @@ struct srfEmissFunctions {
 #endif  // SRF_EMISSION_HPP
 
 #include "srf_emission_impl.hpp"
-// changed
-// changed
-// changed
-// changed
-// changed

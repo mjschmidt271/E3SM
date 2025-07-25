@@ -303,8 +303,3 @@ inline void set_refindex_aerosol(
 }  // namespace scream::mam_coupling
 
 #endif
-// changed
-// changed
-// changed
-// changed
-// changed

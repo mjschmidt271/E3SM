@@ -176,8 +176,3 @@ class MAMSrfOnlineEmiss final : public MAMGenericInterface {
 }  // namespace scream
 
 #endif  // EAMXX_MAM_SRF_ONLINE_EMISS_HPP
-// changed
-// changed
-// changed
-// changed
-// changed

@@ -37,7 +37,7 @@ jobs:
     # 3. the E3SM-Project fork of DoozyX/clang-format-lint-action@v0.20
     #    adds a Step summary to the workflow page, and, on failure, lists the
     #    files that fail the clang-format test
-    - uses: mjschmidt271/clang-format-lint-action@f6f8aec9cfe1722a7c47fe98f8763fc9c4cf66e4
+    - uses: mjschmidt271/clang-format-lint-action@b7ec2dfbe31dbfe6596cf67ca24322ff919716ab
       with:
         source: ${{ steps.changed-files.outputs.all_changed_files }}
         exclude: ''
@@ -52,7 +52,7 @@ jobs:
     - name: remove prev summary file
       # this variable is set in the action's entrypoint.sh
       run: rm $summary_file
-    - uses: mjschmidt271/clang-format-lint-action@f6f8aec9cfe1722a7c47fe98f8763fc9c4cf66e4
+    - uses: mjschmidt271/clang-format-lint-action@b7ec2dfbe31dbfe6596cf67ca24322ff919716ab
       with:
         source: ${{ steps.changed-files.outputs.all_changed_files }}
         exclude: ''

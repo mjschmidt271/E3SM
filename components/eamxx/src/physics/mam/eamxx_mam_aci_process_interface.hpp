@@ -230,8 +230,3 @@ class MAMAci final : public MAMGenericInterface {
 }  // namespace scream
 
 #endif  // EAMXX_MAM_ACI_HPP
-// changed
-// changed
-// changed
-// changed
-// changed
