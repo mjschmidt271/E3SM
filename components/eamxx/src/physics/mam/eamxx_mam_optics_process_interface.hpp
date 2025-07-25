@@ -101,3 +101,4 @@ class MAMOptics final : public MAMGenericInterface {
 
 #endif  // EAMXX_MAM_OPTICS_HPP
 // changed
+// changed
