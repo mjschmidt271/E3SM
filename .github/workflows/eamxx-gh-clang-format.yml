@@ -44,3 +44,15 @@ jobs:
         extensions: 'hpp,cpp'
         clangFormatVersion: 14
         style: 'file:components/eamxx/.clang-format'
+        inplace: True
+    - name: diff format changes
+      run: git diff >> "components/eamxx/clang-format-patch.diff"
+    - name: upload diff patch
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: clang-format-patch_${{ github.workflow }}-${{ github.event_name }}-${{ github.event.pull_request.number || github.run_id }}.diff
+        path: |
+          components/eamxx/clang-format-patch.diff
+      env:
+        NODE_EXTRA_CA_CERTS: ${{ env.NODE_EXTRA_CA_CERTS }}
