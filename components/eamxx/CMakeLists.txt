@@ -617,3 +617,4 @@ print_var(SCREAM_TEST_THREAD_INC)
 print_var(SCREAM_TEST_MAX_RANKS)
 
 message ("**************************************************")
+# comment
