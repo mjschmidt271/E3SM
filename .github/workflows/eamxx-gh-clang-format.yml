@@ -45,13 +45,11 @@ jobs:
         clangFormatVersion: 14
         style: 'file:components/eamxx/.clang-format'
         inplace: True
+        write_summary: False
     - name: diff format changes
       run: git diff >> "components/eamxx/clang-format-patch.diff"
     - name: reset to re-run clang-format
       run: git reset --hard HEAD
-    - name: remove prev summary file
-      # this variable is set in the action's entrypoint.sh
-      run: rm $summary_file
     - uses: mjschmidt271/clang-format-lint-action@b7ec2dfbe31dbfe6596cf67ca24322ff919716ab
       with:
         source: ${{ steps.changed-files.outputs.all_changed_files }}
@@ -60,6 +58,7 @@ jobs:
         clangFormatVersion: 14
         style: 'file:components/eamxx/.clang-format'
         inplace: False
+        write_summary: True
     - name: upload diff patch
       if: always()
       uses: actions/upload-artifact@v4
