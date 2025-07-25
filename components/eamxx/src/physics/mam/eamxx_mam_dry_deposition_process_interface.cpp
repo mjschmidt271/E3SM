@@ -406,6 +406,3 @@ void MAMDryDep::run_impl(const double dt) {
   Kokkos::fence();  // wait before returning to calling function
 }  // run_impl
 }  // namespace scream
-// changed
-// changed
-// changed

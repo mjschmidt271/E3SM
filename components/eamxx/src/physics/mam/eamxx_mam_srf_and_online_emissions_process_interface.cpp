@@ -471,6 +471,3 @@ void MAMSrfOnlineEmiss::run_impl(const double dt) {
 }  // run_impl ends
 // =============================================================================
 }  // namespace scream
-// changed
-// changed
-// changed

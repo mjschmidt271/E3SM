@@ -453,6 +453,3 @@ void MAMOptics::run_impl(const double dt) {
 void MAMOptics::finalize_impl() {}
 
 }  // namespace scream
-// changed
-// changed
-// changed

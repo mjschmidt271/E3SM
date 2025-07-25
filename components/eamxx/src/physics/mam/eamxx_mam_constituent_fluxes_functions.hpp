@@ -69,6 +69,3 @@ void update_gas_aerosols_using_constituents(
 }  // namespace scream
 
 #endif  // ifdef EAMXX_MAM_CONSTITUTE_FLUXES_FUNCTIONS_HPP
-// changed
-// changed
-// changed

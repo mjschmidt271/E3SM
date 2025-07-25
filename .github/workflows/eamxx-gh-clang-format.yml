@@ -37,7 +37,7 @@ jobs:
     # 3. the E3SM-Project fork of DoozyX/clang-format-lint-action@v0.20
     #    adds a Step summary to the workflow page, and, on failure, lists the
     #    files that fail the clang-format test
-    - uses: mjschmidt271/clang-format-lint-action@62e6a4cfdf206930e76829294a7d455aaf87c1e4
+    - uses: mjschmidt271/clang-format-lint-action@f2ec09454bde102a03bd88b814db510fa865cc6e
       with:
         source: ${{ steps.changed-files.outputs.all_changed_files }}
         exclude: ''
@@ -50,7 +50,7 @@ jobs:
       run: git diff >> "components/eamxx/clang-format-patch.diff"
     - name: reset to re-run clang-format
       run: git reset --hard HEAD
-    - uses: mjschmidt271/clang-format-lint-action@62e6a4cfdf206930e76829294a7d455aaf87c1e4
+    - uses: mjschmidt271/clang-format-lint-action@f2ec09454bde102a03bd88b814db510fa865cc6e
       with:
         source: ${{ steps.changed-files.outputs.all_changed_files }}
         exclude: ''

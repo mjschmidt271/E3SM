@@ -829,6 +829,3 @@ inline void copy_view_lev_slice(
 }  // namespace scream::mam_coupling
 
 #endif
-// changed
-// changed
-// changed

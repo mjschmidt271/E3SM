@@ -126,6 +126,3 @@ class MAMWetscav : public MAMGenericInterface {
 }  // namespace scream
 
 #endif  // EAMXX_MAM_WETSCAV_HPP
-// changed
-// changed
-// changed

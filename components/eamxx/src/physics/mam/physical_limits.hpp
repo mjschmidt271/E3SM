@@ -39,6 +39,3 @@ inline Real physical_max(const std::string &field_name) {
 }  // namespace scream::mam_coupling
 
 #endif
-// changed
-// changed
-// changed
