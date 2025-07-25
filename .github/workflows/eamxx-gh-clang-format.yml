@@ -30,6 +30,11 @@ jobs:
       with:
         files: 'components/eamxx/**/*.{cpp,hpp}'
         separator: " "
+    - name: Check if list of files is empty
+      if: ${{ steps.changed-files.outputs.all_changed_files }} == ''
+      run: |
+        echo "Error: No format-targeted files changed--Exiting now."
+        exit 1
     # 1. runs clang-format on the files changed by this PR, and returns pass/fail
     #    error code.
     # 2. prints the diff to screen (action log), comparing to the changes
