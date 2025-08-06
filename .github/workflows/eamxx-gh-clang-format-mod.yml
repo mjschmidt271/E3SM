@@ -46,6 +46,7 @@ jobs:
     - name: get version clang-format-18
       run: |
         ver=$(clang-format-18 --version)
+        cf_exe="clang-format-${ver}"
         if [ "${ver}" = "18.1.3" ]; then
           echo "Running clang-format version ${ver}."
         else
@@ -57,5 +58,38 @@ jobs:
       run: |
         flist="${{ steps.changed-files.outputs.all_changed_files }}"
         for f in ${flist[@]}; do
-          echo "${f}"
+          echo "--Now formatting ${f}--"
+          eval "${cf_exe} -i --style="file:$(pwd)/../../.clang-format ${f}"
+          # git diff --quiet -- "${f}"
+          # retval=$?
+          # if $retval; then
+          #   echo "--Now formatting ${f}--"
+          # else
+          #   echo "${f}\n" >> $GITHUB_STEP_SUMMARY
+          # fi
         done
+        git diff --name-only --exit-code > diffiles.txt
+        if [[ $? -eq 0 ]]; then
+          echo "## Status: \`clang-format\` Check Passed!" > "${GITHUB_STEP_SUMMARY}"
+          exit 0
+        else
+          echo "## Status: \`clang-format\` Check Failed." > "${GITHUB_STEP_SUMMARY}"
+          echo "" >> "${GITHUB_STEP_SUMMARY}"
+          echo "The following files require formatting:" >> "${GITHUB_STEP_SUMMARY}"
+          echo "" >> "${GITHUB_STEP_SUMMARY}"
+          echo "\`\`\`" >> "${GITHUB_STEP_SUMMARY}"
+          cat diffiles.txt >> "${GITHUB_STEP_SUMMARY}"
+          echo "\`\`\`" >> "${GITHUB_STEP_SUMMARY}"
+          echo "" >> "${GITHUB_STEP_SUMMARY}"
+          echo "To format all of these files at once, download the " \
+               "patch file below, \`clang-format-patch_[...].diff\`, " \
+               "from the ***Artifacts*** section." >> "${GITHUB_STEP_SUMMARY}"
+          echo "Note that it may take a moment for the file to appear " \
+               "or may require reloading the page." >> "${GITHUB_STEP_SUMMARY}"
+          echo "" >> "${GITHUB_STEP_SUMMARY}"
+          echo "To apply the patch containing the formatting edits, " \
+               "execute \`git apply <patch-file>\` from your local E3SM " \
+               "branch." >> "${GITHUB_STEP_SUMMARY}"
+          echo "Then commit the changes and push to your remote branch." >> "${GITHUB_STEP_SUMMARY}"
+          exit 1
+        fi
