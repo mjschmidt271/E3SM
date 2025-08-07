@@ -65,7 +65,9 @@ jobs:
           run_cfmt "${f}"
         done
         git diff --name-only --exit-code > diffiles.txt
-        if [[ $? -eq 0 ]]; then
+        cat diffiles.txt
+        wc -l < diffiles.txt
+        if [[ $(wc -l < diffiles.txt) -gt 0 ]]; then
           echo "## Status: \`clang-format\` Check Passed!" > "${GITHUB_STEP_SUMMARY}"
           exit 0
         else
