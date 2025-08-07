@@ -66,6 +66,7 @@ jobs:
         done
         git diff --name-only > diffiles.txt
         if [[ $(wc -l < diffiles.txt) -gt 0 ]]; then
+          echo "status_fail=true" >> "${GITHUB_ENV}"
           echo "## Status: \`clang-format\` Check Failed." > "${GITHUB_STEP_SUMMARY}"
           echo "" >> "${GITHUB_STEP_SUMMARY}"
           echo "The following files require formatting:" >> "${GITHUB_STEP_SUMMARY}"
@@ -84,17 +85,23 @@ jobs:
                "execute \`git apply <patch-file>\` from your local E3SM " \
                "branch." >> "${GITHUB_STEP_SUMMARY}"
           echo "Then commit the changes and push to your remote branch." >> "${GITHUB_STEP_SUMMARY}"
-          exit 1
         else
+          echo "status_fail=false" >> "${GITHUB_ENV}"
           echo "## Status: \`clang-format\` Check Passed!" > "${GITHUB_STEP_SUMMARY}"
-          exit 0
         fi
     - name: diff format changes
       run: git diff > "components/eamxx/clang-format-patch.diff"
     - name: upload diff patch
-      if: always()
+      if: ${{ env.status_fail }}
       uses: actions/upload-artifact@v4
       with:
         name: clang-format-patch_${{ github.workflow }}-${{ github.event_name }}-${{ github.event.pull_request.number || github.run_id }}.diff
         path: |
           components/eamxx/clang-format-patch.diff
+    - name: write summary
+      run: |
+        if [[ ${status_fail} ]]; then
+          exit 1
+        else
+          exit 0
+        fi
