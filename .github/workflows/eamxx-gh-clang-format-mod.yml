@@ -57,9 +57,12 @@ jobs:
     - name: loop over files
       run: |
         flist="${{ steps.changed-files.outputs.all_changed_files }}"
+        run_cfmt () {
+          ${cf_exe} -i --style=file:$(pwd)/../../.clang-format $1
+        }
         for f in ${flist[@]}; do
           echo "--Now formatting ${f}--"
-          eval "${cf_exe} -i --style=file:$(pwd)/../../.clang-format ${f}"
+          run_cfmt "${f}"
         done
         git diff --name-only --exit-code > diffiles.txt
         if [[ $? -eq 0 ]]; then
