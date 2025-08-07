@@ -64,11 +64,7 @@ jobs:
           echo "--Now formatting ${f}--"
           run_cfmt "${f}"
         done
-        git --version
-        git diff --name-only
         git diff --name-only > diffiles.txt
-        cat diffiles.txt
-        wc -l < diffiles.txt
         if [[ $(wc -l < diffiles.txt) -gt 0 ]]; then
           echo "## Status: \`clang-format\` Check Failed." > "${GITHUB_STEP_SUMMARY}"
           echo "" >> "${GITHUB_STEP_SUMMARY}"
@@ -93,4 +89,12 @@ jobs:
           echo "## Status: \`clang-format\` Check Passed!" > "${GITHUB_STEP_SUMMARY}"
           exit 0
         fi
-
+    - name: diff format changes
+      run: git diff > "components/eamxx/clang-format-patch.diff"
+    - name: upload diff patch
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: clang-format-patch_${{ github.workflow }}-${{ github.event_name }}-${{ github.event.pull_request.number || github.run_id }}.diff
+        path: |
+          components/eamxx/clang-format-patch.diff
