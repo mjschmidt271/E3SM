@@ -46,7 +46,6 @@ jobs:
     - name: get version clang-format-18
       run: |
         ver=$(clang-format-18 --version)
-        cf_exe="clang-format-${ver}"
         if [ "${ver}" = "18.1.3" ]; then
           echo "Running clang-format version ${ver}."
         else
@@ -58,7 +57,7 @@ jobs:
       run: |
         flist="${{ steps.changed-files.outputs.all_changed_files }}"
         run_cfmt () {
-          "${cf_exe} -i --style=file:$(pwd)/../../.clang-format" $1
+          clang-format-18 -i --style=file:"$(pwd)/../../.clang-format" $1
         }
         for f in ${flist[@]}; do
           echo "--Now formatting ${f}--"
