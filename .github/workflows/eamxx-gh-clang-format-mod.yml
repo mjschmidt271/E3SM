@@ -60,13 +60,6 @@ jobs:
         for f in ${flist[@]}; do
           echo "--Now formatting ${f}--"
           eval "${cf_exe} -i --style="file:$(pwd)/../../.clang-format ${f}"
-          # git diff --quiet -- "${f}"
-          # retval=$?
-          # if $retval; then
-          #   echo "--Now formatting ${f}--"
-          # else
-          #   echo "${f}\n" >> $GITHUB_STEP_SUMMARY
-          # fi
         done
         git diff --name-only --exit-code > diffiles.txt
         if [[ $? -eq 0 ]]; then
