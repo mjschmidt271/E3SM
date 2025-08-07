@@ -64,7 +64,9 @@ jobs:
           echo "--Now formatting ${f}--"
           run_cfmt "${f}"
         done
-        git diff --name-only --exit-code > diffiles.txt
+        git --version
+        git diff --name-only
+        git diff --name-only > diffiles.txt
         cat diffiles.txt
         wc -l < diffiles.txt
         if [[ $(wc -l < diffiles.txt) -gt 0 ]]; then
