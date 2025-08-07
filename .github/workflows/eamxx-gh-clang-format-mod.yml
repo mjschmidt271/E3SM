@@ -57,7 +57,7 @@ jobs:
       run: |
         flist="${{ steps.changed-files.outputs.all_changed_files }}"
         run_cfmt () {
-          clang-format-18 -i --style=file:"$(pwd)/../../.clang-format" $1
+          clang-format-18 -i --style=file:"components/eamxx/.clang-format" $1
         }
         for f in ${flist[@]}; do
           echo "--Now formatting ${f}--"
